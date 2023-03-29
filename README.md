@@ -23,12 +23,17 @@ source /opt/ros/humble/setup.bash
 ## Clone, build and launch
 
 ```
-mkdir mueller_auto
-cd mueller_auto
+mkdir mueller-auto-sim
+cd mueller-auto-sim
 git clone git@github.com:Mueller-Automotive/mueller-auto-sim.git
 
 colcon build --symlink-install
 
 source install/setup.bash
-ros2 launch mueller_auto launch_sim.launch.py
+ros2 launch mueller-auto launch_sim.launch.py
+```
+
+## Control
+```
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
