@@ -14,7 +14,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-a
 sudo apt update
 sudo apt upgrade
 
-sudo apt install ros-humble-desktop ros-humble-gazebo-ros ros-humble-gazebo-ros-pkgs
+sudo apt install ros-humble-desktop ros-humble-gazebo-ros ros-humble-gazebo-ros-pkgs ros-humble-xacro
 
 echo -e "source /opt/ros/humble/setup.bash" >> ~/.bashrc
 source /opt/ros/humble/setup.bash
