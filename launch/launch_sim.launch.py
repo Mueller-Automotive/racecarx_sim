@@ -17,7 +17,7 @@ def generate_launch_description():
     # Include the robot_state_publisher launch file, provided by our own package. Force sim time to be enabled
     
     # Make sure package name is correct
-    package_name='mueller_auto' # <--- CHANGE ME
+    package_name='mueller-auto' # <--- CHANGE ME
 
     rsp = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
