@@ -35,5 +35,5 @@ ros2 launch mueller-auto launch_sim.launch.py
 
 ## Control
 ```
-ros2 run teleop_twist_keyboard teleop_twist_keyboard
+gz topic --topic /model/racecarx/steer_angle --msgtype gz.msgs.Double -p "data:0.2"
 ```
