@@ -17,7 +17,7 @@ then
 fi
 if ! [ -f /etc/apt/sources.list.d/gazebo-prerelease.list ]
 then
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-prerelease $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-prerelease.list > /dev/null
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-prerelease jammy main" | sudo tee /etc/apt/sources.list.d/gazebo-prerelease.list > /dev/null
 fi
 
 sudo apt update
