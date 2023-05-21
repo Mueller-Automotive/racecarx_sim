@@ -30,6 +30,12 @@ def generate_launch_description():
                 )]), launch_arguments={'use_sim_time': 'true'}.items()
     )
 
+    camera = rsp = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory(package_name),'launch','camera.launch.py'
+                )])
+    )
+
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim') #checked
     gz_sim_launch = PathJoinSubstitution([pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py']) #checked
 
@@ -59,6 +65,7 @@ def generate_launch_description():
     # Launch them all!
     return LaunchDescription([
         #rsp,
+        #camera,
         gz_sim,
         spawn_robot,
     ])
