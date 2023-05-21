@@ -57,6 +57,17 @@ def generate_launch_description():
                           arguments=[
                               '/model/racecarx/cmd_vel' + '@geometry_msgs/msg/Twist' + ']gz.msgs.Twist',
                           ])
+
+    # actuators bridge
+    actuators_bridge = Node(package='ros_gz_bridge', executable='parameter_bridge',
+                          name='actuators_bridge',
+                          output='screen',
+                          parameters=[{
+                              'use_sim_time': True
+                          }],
+                          arguments=[
+                              '/actuators' + '@actuator_msgs/msg/Actuators' + ']gz.msgs.Actuators',
+                          ])
     
     # Run the spawner node from the gazebo_ros package. The entity name doesn't really matter if you only have a single robot.
     spawn_robot = Node(
@@ -80,6 +91,7 @@ def generate_launch_description():
     return LaunchDescription([
         #rsp,
         #camera,
+        actuators_bridge,
         cmd_vel_bridge,
         gz_sim,
         spawn_robot,

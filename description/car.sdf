@@ -449,18 +449,16 @@
 		<plugin
 			filename="gz-sim-joint-controller-system"
 			name="gz::sim::systems::JointController">
-			<joint_name>front_left_wheel_joint</joint_name>
-			<joint_name>front_right_wheel_joint</joint_name>
-			<joint_name>rear_right_wheel_joint</joint_name>
 			<joint_name>rear_left_wheel_joint</joint_name>
-			<!--
-			<sub_topic>drive</sub_topic> 
+			<joint_name>rear_right_wheel_joint</joint_name>
+			<!--<sub_topic>drive</sub_topic> -->
 			<use_actuator_msg>true</use_actuator_msg>
 			<actuator_number>0</actuator_number>
-			-->
 		</plugin>
 		<plugin name='gz::sim::systems::AckermannSteering' filename='gz-sim-ackermann-steering-system'>
-			<!--<steering_only>true</steering_only>-->
+			<steering_only>true</steering_only>
+			<use_actuator_msg>true</use_actuator_msg>
+			<actuator_number>0</actuator_number>
 			<left_joint>front_left_wheel_joint</left_joint>
 			<left_joint>rear_left_wheel_joint</left_joint>
 			<right_joint>front_right_wheel_joint</right_joint>
