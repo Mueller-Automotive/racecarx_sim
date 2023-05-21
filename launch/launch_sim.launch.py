@@ -2,21 +2,12 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 
-
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 
 from launch_ros.actions import Node
-
-ARGUMENTS = [
-    DeclareLaunchArgument('world', default_value='depot',
-                          description='GZ World'),
-    DeclareLaunchArgument('robot_name', default_value='racercarx',
-                          description='Robot name')
-]
-
 
 def generate_launch_description():
     # Include the robot_state_publisher launch file, provided by our own package. Force sim time to be enabled
