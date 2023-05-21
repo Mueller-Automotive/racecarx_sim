@@ -1,8 +1,0 @@
-twist_controller:
-  type: "diff_drive_controller/DiffDriveController"
-  left_wheel_joint: "rear_left_wheel_joint"
-  right_wheel_joint: "rear_right_wheel_joint"
-  wheel_separation: 0.2
-  wheel_radius: 0.1
-  publish_rate: 50.0
-  cmd_vel_timeout: 0.25
