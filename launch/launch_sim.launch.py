@@ -22,7 +22,9 @@ def generate_launch_description():
     gz_sim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([gz_sim_launch]),
         launch_arguments=[
-            ('gz_args', [PathJoinSubstitution([get_package_share_directory(package_name), 'worlds', 'depot.sdf']), ' -r'])
+            ('gz_args', [
+                PathJoinSubstitution([get_package_share_directory(package_name), 'worlds', 'depot.sdf']),
+                 ' -r'])
         ]
     )
 
