@@ -54,6 +54,9 @@ def generate_launch_description():
         arguments=[
             '-world', 'racecarx-depot',
             '-name', 'racecarx',
+            '-x', '8.7566537354533125e-11',
+            '-y', '2.0000000001634253',
+            '-z', '0.3250071890159123',
             '-file', PathJoinSubstitution(
                 [get_package_share_directory(package_name),
                 'description',
@@ -61,7 +64,7 @@ def generate_launch_description():
         ],
         output='screen'
     )
-
+    # 8.7566537354533125e-11 2.0000000001634253 0.3250071890159123 -5.0518222677781699e-10 3.1007408737803522e-10 -5.1850145662276096e-12
     # Launch them all!
     return LaunchDescription([
         #rsp,
