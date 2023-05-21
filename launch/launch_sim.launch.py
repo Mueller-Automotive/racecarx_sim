@@ -15,30 +15,18 @@ def generate_launch_description():
     # Make sure package name is correct
     package_name='mueller_auto' # <--- CHANGE ME
 
-    rsp = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory(package_name),'launch','rsp.launch.py'
-                )]), launch_arguments={'use_sim_time': 'true'}.items()
-    )
-
-    camera = rsp = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory(package_name),'launch','camera.launch.py'
-                )])
-    )
-
-    pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim') #checked
-    gz_sim_launch = PathJoinSubstitution([pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py']) #checked
+    pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
+    gz_sim_launch = PathJoinSubstitution([pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py'])
 
     # Gazebo
     gz_sim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([gz_sim_launch]),
         launch_arguments=[
-            ('gz_args', [PathJoinSubstitution([get_package_share_directory(package_name), 'worlds', 'depot.sdf'])])
+            ('gz_args', [PathJoinSubstitution([get_package_share_directory(package_name), 'worlds', 'depot.sdf']), ' -r'])
         ]
     )
 
-    # actuators bridge
+    # Bridge Actuators messages between ROS and Gazebo
     actuators_bridge = Node(package='ros_gz_bridge', executable='parameter_bridge',
                             name='actuators_bridge',
                             output='screen',
@@ -49,16 +37,16 @@ def generate_launch_description():
                                 '/actuators' + '@actuator_msgs/msg/Actuators' + ']gz.msgs.Actuators',
                             ])
     
-    # Run the spawner node from the gazebo_ros package. The entity name doesn't really matter if you only have a single robot.
+    # Spawn an entity of the car in the world we started
     spawn_robot = Node(
         package='ros_gz_sim',
         executable='create',
         arguments=[
             '-world', 'racecarx-depot',
             '-name', 'racecarx',
-            '-x', '8.7566537354533125e-11',
-            '-y', '2.0000000001634253',
-            '-z', '0.3250071890159123',
+            '-x', '0',
+            '-y', '2',
+            '-z', '0.35',
             '-file', PathJoinSubstitution(
                 [get_package_share_directory(package_name),
                 'description',
