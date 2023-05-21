@@ -2,6 +2,8 @@
 <sdf version="1.10">
 	<model name='racecarx'>
 		<pose>8.7566537354533125e-11 2.0000000001634253 0.3250071890159123 -5.0518222677781699e-10 3.1007408737803522e-10 -5.1850145662276096e-12</pose>
+		<static>false</static>
+		<self_collide>false</self_collide>
 		<link name='chassis'>
 			<pose>-0.15142700000000001 0 0.17499999999999999 0 0 0</pose>
 			<inertial>
@@ -470,31 +472,7 @@
 			<steering_limit>0.5</steering_limit>
 			<wheel_base>1.0</wheel_base>
 			<wheel_separation>1.25</wheel_separation>
-			<!--
-			<wheel_radius>0.3</wheel_radius>
-			<min_velocity>-1</min_velocity>
-			<max_velocity>1</max_velocity>
-			<min_acceleration>-3</min_acceleration>
-			<max_acceleration>3</max_acceleration>
-			-->
 		</plugin>
-		<!--
-		<plugin
-			filename="gz-sim-ackermann-steering-system"
-			name="gz::sim::systems::AckermannSteering">
-			<steering_only>true</steering_only>
-			<use_actuator_msg>true</use_actuator_msg>
-			<actuator_number>0</actuator_number>
-			<left_steering_joint>front_left_wheel_joint</left_steering_joint>
-			<right_steering_joint>front_right_wheel_joint</right_steering_joint>
-			<steering_limit>0.4</steering_limit>
-			<steer_p_gain>10.0</steer_p_gain>
-			<wheel_base>.2255</wheel_base>
-			<wheel_separation>.2</wheel_separation>
-		</plugin>
-		-->
-		<static>false</static>
-		<self_collide>false</self_collide>
 
 		<link name="camera_link">
 			<pose>0.3 0 0.7 0 0 0</pose>
