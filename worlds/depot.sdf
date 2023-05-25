@@ -284,38 +284,38 @@
 			<static>true</static>
 			<link name='link'>
 				<collision name='collision'>
-				<geometry>
-					<plane>
-					<normal>0 0 1</normal>
-					<size>100 100</size>
-					</plane>
-				</geometry>
-				<surface>
-					<friction>
-					<ode>
-						<mu>50</mu>
-					</ode>
-					<bullet>
-						<friction>1</friction>
-						<rolling_friction>0.10000000000000001</rolling_friction>
-					</bullet>
-					</friction>
-					<bounce/>
-					<contact/>
-				</surface>
+					<geometry>
+						<plane>
+						<normal>0 0 1</normal>
+						<size>100 100</size>
+						</plane>
+					</geometry>
+					<surface>
+						<friction>
+						<ode>
+							<mu>50</mu>
+						</ode>
+						<bullet>
+							<friction>1</friction>
+							<rolling_friction>0.1</rolling_friction>
+						</bullet>
+						</friction>
+						<bounce/>
+						<contact/>
+					</surface>
 				</collision>
 				<visual name='visual'>
-				<geometry>
-					<plane>
-					<normal>0 0 1</normal>
-					<size>100 100</size>
-					</plane>
-				</geometry>
-				<material>
-					<ambient>0.800000012 0.800000012 0.800000012 1</ambient>
-					<diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
-					<specular>0.800000012 0.800000012 0.800000012 1</specular>
-				</material>
+					<geometry>
+						<plane>
+						<normal>0 0 1</normal>
+						<size>100 100</size>
+						</plane>
+					</geometry>
+					<material>
+						<ambient>0.05 0.05 0.05 1</ambient>
+						<diffuse>0.05 0.05 0.05 1</diffuse>
+						<specular>0 0 0 0</specular>
+					</material>
 				</visual>
 				<pose>0 0 0 0 0 0</pose>
 				<inertial>
@@ -334,6 +334,63 @@
 			</link>
 			<pose>0 0 0 0 0 0</pose>
 			<self_collide>false</self_collide>
+		</model>
+
+		<model name='test'>
+			<pose>0 0 0.01 0 0 0</pose>
+			<static>true</static>
+			<self_collide>false</self_collide>
+			<link name='plane1'>
+				<pose>0 0 0 0 0 0</pose>
+				<visual name='visual'>
+					<geometry>
+						<plane>
+						<normal>0 0 1</normal>
+						<size>0.4 0.4</size>
+						</plane>
+					</geometry>
+					<material>
+						<ambient>0.7 0.7 0.7 1</ambient>
+						<diffuse>0.7 0.7 0.7 1</diffuse>
+						<specular>0 0 0 0</specular>
+						<emissive>0 0 0 1</emissive>
+					</material>
+				</visual>
+			</link>
+			<link name='plane2'>
+				<pose>0.8 0 0 0 0 0</pose>
+				<visual name='visual'>
+					<geometry>
+						<plane>
+						<normal>0 0 1</normal>
+						<size>0.4 0.4</size>
+						</plane>
+					</geometry>
+					<material>
+						<ambient>0.7 0.7 0.7 1</ambient>
+						<diffuse>0.7 0.7 0.7 1</diffuse>
+						<specular>0 0 0 0</specular>
+						<emissive>0 0 0 1</emissive>
+					</material>
+				</visual>
+			</link>
+			<link name='plane3'>
+				<pose>1.6 0 0 0 0 0</pose>
+				<visual name='visual'>
+					<geometry>
+						<plane>
+						<normal>0 0 1</normal>
+						<size>0.4 0.4</size>
+						</plane>
+					</geometry>
+					<material>
+						<ambient>0.7 0.7 0.7 1</ambient>
+						<diffuse>0.7 0.7 0.7 1</diffuse>
+						<specular>0 0 0 0</specular>
+						<emissive>0 0 0 1</emissive>
+					</material>
+				</visual>
+			</link>
 		</model>
 		
 		<light name='sun' type='directional'>
