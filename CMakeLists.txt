@@ -17,18 +17,29 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
+
+find_package(gz-cmake3 REQUIRED)
+
+find_package(gz-sim7 REQUIRED)
+set(GZ_SIM_VER ${gz-sim7_VERSION_MAJOR})
+
+find_package(gz-common5 REQUIRED)
+gz_find_package(gz-plugin2 REQUIRED COMPONENTS register)
+
+set(GZ_PLUGIN_VER ${gz-plugin2_VERSION_MAJOR})
+set(GZ_COMMON_VER ${gz-common5_VERSION_MAJOR})
+
+# Add sources for each plugin to be registered.
+add_library(MyPlugin SHARED plugins/MyPlugin.cc)
+set_property(TARGET MyPlugin PROPERTY CXX_STANDARD 17)
+target_link_libraries(MyPlugin
+  gz-common${GZ_COMMON_VER}::gz-common${GZ_COMMON_VER}
+  gz-plugin${GZ_PLUGIN_VER}::gz-plugin${GZ_PLUGIN_VER}
+  gz-sim${GZ_SIM_VER}::gz-sim${GZ_SIM_VER}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
-  # the following line skips the linter which checks for copyrights
-  # uncomment the line when a copyright and license is not present in all source files
-  #set(ament_cmake_copyright_FOUND TRUE)
-  # the following line skips cpplint (only works in a git repo)
-  # uncomment the line when this package is not in a git repo
-  #set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
 
@@ -36,5 +47,14 @@ install(
   DIRECTORY config description launch worlds
   DESTINATION share/${PROJECT_NAME}
 )
+
+install(TARGETS MyPlugin EXPORT MyPlugin
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+)
+
+#ament_export_targets(MyPlugin)
+#ament_export_dependencies(MyPlugin)
 
 ament_package()

@@ -278,8 +278,11 @@
 			</plugin>
 		</gui>
 
-		
-		
+		<plugin
+		filename="libMyPlugin.so"
+		name="MyPlugin">
+		</plugin>
+
 		<model name='ground_plane'>
 			<static>true</static>
 			<link name='link'>
