@@ -278,11 +278,6 @@
 			</plugin>
 		</gui>
 
-		<plugin
-		filename="libMyPlugin.so"
-		name="MyPlugin">
-		</plugin>
-
 		<model name='ground_plane'>
 			<static>true</static>
 			<link name='link'>
@@ -339,7 +334,8 @@
 			<self_collide>false</self_collide>
 		</model>
 
-		<model name='test'>
+		<!--
+		<model name='dashed-line'>
 			<pose>0 0 0.01 0 0 0</pose>
 			<static>true</static>
 			<self_collide>false</self_collide>
@@ -395,6 +391,7 @@
 				</visual>
 			</link>
 		</model>
+		-->
 		
 		<light name='sun' type='directional'>
 			<pose>0 0 10 0 0 0</pose>

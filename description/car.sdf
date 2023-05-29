@@ -4,6 +4,7 @@
 		<pose>8.7566537354533125e-11 2.0000000001634253 0.3250071890159123 -5.0518222677781699e-10 3.1007408737803522e-10 -5.1850145662276096e-12</pose>
 		<static>false</static>
 		<self_collide>false</self_collide>
+		<plugin filename="libMyPlugin.so" name="MyPlugin"></plugin>
 		<link name='chassis'>
 			<pose>-0.15142700000000001 0 0.17499999999999999 0 0 0</pose>
 			<inertial>

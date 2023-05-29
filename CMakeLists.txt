@@ -8,11 +8,11 @@ endif()
 
 # Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 14)
+  set(CMAKE_CXX_STANDARD 20)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra -Wpedantic)
+  add_compile_options(-Wall -Wextra -Wpedantic -std=c++20)
 endif()
 
 # find dependencies
@@ -37,6 +37,8 @@ target_link_libraries(MyPlugin
   gz-plugin${GZ_PLUGIN_VER}::gz-plugin${GZ_PLUGIN_VER}
   gz-sim${GZ_SIM_VER}::gz-sim${GZ_SIM_VER}
 )
+
+include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
