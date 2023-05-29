@@ -35,10 +35,10 @@ class MyPlugin
         // Get link entity
         this->linkEntity = _entity;
 
-        std::vector<gz::math::Vector4<float>> points = getCurvedLinePoints(
+        std::vector<gz::math::Vector4<float>> points = getBezierPoints(
             gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0), 
             gz::math::Vector4<float>(13.0, 13.0, 0.0, 1.0), 
-            90, 
+            90,
             5);
 
         for (int i = 0; i < points.size(); i++)
@@ -46,21 +46,23 @@ class MyPlugin
             std::cout << points[i] << std::endl;
         }
 
-        DashedLine line1("dashed-line-1", 
+        DashedLine dashed_line("dashed-line-1", 
                 gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0), 
-                gz::math::Vector4<float>(10.0, 0.0, 0.0, 1.0), 
+                gz::math::Vector4<float>(-10.0, -10.0, 0.0, 1.0), 
                 gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0));
-        
-        DashedLine line2("dashed-line-2", 
                 gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
-                gz::math::Vector4<float>(10.0, 0.0, 0.0, 1.0),
+                90);
+        
+        Line curved_line("curved-line-1", 
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector4<float>(10.0, 10.0, 0.0, 1.0),
                 gz::math::Vector4<float>(0.0, 3.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0));
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                90);
 
-        std::vector<DashedLine> dashedLines;
-        dashedLines.push_back(line1);
-        dashedLines.push_back(line2);
+        std::vector<Line*> lines;
+        lines.push_back(&dashed_line);
+        lines.push_back(&curved_line);
 
         bool result;
         gz::msgs::EntityFactory req;
@@ -69,9 +71,9 @@ class MyPlugin
 
         unsigned int timeout = 5000;
         
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < lines.size(); i++)
         {
-            req.set_sdf(dashedLines[i].getSdf());
+            req.set_sdf(lines[i]->getSdf());
             bool executed = this->node.Request("/world/racecarx-depot/create", req, timeout, res, result);
             if (executed)
             {
@@ -99,7 +101,7 @@ class MyPlugin
 
     // Create a discrete polyline between two points at a given angle
     // by creating a quadratic Bezier curve
-    private: std::vector<gz::math::Vector4<float>> getCurvedLinePoints(gz::math::Vector4<float> p1, gz::math::Vector4<float> p2, float angle, int segments)
+    private: std::vector<gz::math::Vector4<float>> getBezierPoints(gz::math::Vector4<float> p1, gz::math::Vector4<float> p2, float angle, int segments)
     {
         std::vector<gz::math::Vector4<float>> points;
 
