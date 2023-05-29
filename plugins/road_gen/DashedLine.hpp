@@ -22,7 +22,7 @@ public:
         std::vector<std::string> links;
         for (int i = 0; i < (int)(distance / (dash_solid + dash_gap)); i++)
         {
-            std::string plane_start = fmt::format("<link name='{}'> \
+            std::string link_start = fmt::format("<link name='{}'> \
                                                     <visual name='visual'>\
                                                         <geometry>\
                                                         <plane>\
@@ -44,10 +44,10 @@ public:
             float r_y = 0;
             float r_z = 0;
             
-            std::string plane_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", x, y, z, r_x, r_y, r_z);
-            std::string plane_end = "</link>";
+            std::string link_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", x, y, z, r_x, r_y, r_z);
+            std::string link_end = "</link>";
 
-            links.push_back(plane_start + plane_pose + plane_end);
+            links.push_back(link_start + link_pose + link_end);
 
         }
         
@@ -83,7 +83,7 @@ public:
 
             std::cout << "Center " << i << " :" << center << std::endl;
 
-            std::string plane_start = fmt::format("<link name='{}'> \
+            std::string link_start = fmt::format("<link name='{}'> \
                                                 <visual name='visual'>\
                                                 <geometry>\
                                                 <plane>\
@@ -97,12 +97,12 @@ public:
                                                 <specular>0 0 0 0</specular>\
                                                 <emissive>0 0 0 1</emissive>\
                                                 </material>\
-                                                </visual>", "plane"+std::to_string(i), points[i].Distance(points[i+1]) / 2, line_width);
+                                                </visual>", "link"+std::to_string(i), points[i].Distance(points[i+1]) / 2, line_width);
 
-            std::string plane_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", center[0], center[1], center[2], 0, 0, rot);
-            std::string plane_end = "</link>";
+            std::string link_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", center[0], center[1], center[2], 0, 0, rot);
+            std::string link_end = "</link>";
 
-            links.push_back(plane_start + plane_pose + plane_end);
+            links.push_back(link_start + link_pose + link_end);
         }       
 
         std::string sdf = model_start + model_pose;
