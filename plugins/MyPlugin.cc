@@ -6,7 +6,7 @@
 #include <gz/msgs/entity_factory.pb.h>
 #include <gz/transport/Node.hh>
 
-#include <plugins/road_gen/Line.hpp>
+#include <plugins/road_gen/DashedLine.hpp>
 
 using namespace gz;
 using namespace sim;
@@ -35,9 +35,10 @@ class MyPlugin
         // Get link entity
         this->linkEntity = _entity;
 
-        Line line("sdf-build-example", 
-                gz::math::Vector4<float>(0.0, 0.0, 0.1, 1.0), 
+        DashedLine line("sdf-build-example", 
                 gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0), 
+                gz::math::Vector4<float>(10.0, 0.0, 0.0, 1.0), 
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
                 gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0));
 
         bool result;

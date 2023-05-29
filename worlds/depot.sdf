@@ -21,6 +21,7 @@
 			<ambient>0.400000006 0.400000006 0.400000006 1</ambient>
 			<background>0.699999988 0.699999988 0.699999988 1</background>
 			<shadows>true</shadows>
+			<grid>false</grid>
 		</scene>
 
 		<gui fullscreen="0">
