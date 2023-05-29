@@ -134,19 +134,20 @@ class MyPlugin
         std::cout << "midpoint: " << midpoint << std::endl;
         std::cout << "control point: " << controlPoint << std::endl;
 
-        for (int i = 0; i < segments; i++)
+        for (int i = 0; i < segments + 1; i++)
         {
-            float xa = getPt(p1[0], midpoint[0], i / segments);
-            float ya = getPt(p1[1], midpoint[1], i / segments);
-            float xb = getPt(midpoint[0], p2[0], i / segments);
-            float yb = getPt(midpoint[1], p2[1], i / segments);
+            float perc = (float)i / segments;
+            float xa = getPt(p1[0], controlPoint[0], perc);
+            float ya = getPt(p1[1], controlPoint[1], perc);
+            float xb = getPt(controlPoint[0], p2[0], perc);
+            float yb = getPt(controlPoint[1], p2[1], perc);
             
-            float x = getPt(xa, xb, i / segments);
-            float y = getPt(ya, yb, i / segments);
+            float x = getPt(xa, xb, perc);
+            float y = getPt(ya, yb, perc);
 
             std::cout << "X" << i << " :" << x << std::endl;
             std::cout << "Y" << i << " :" << x << std::endl;
-            std::cout << "Perc: " << i / segments << std::endl;
+            std::cout << "Perc: " << perc << std::endl;
 
             points.push_back(gz::math::Vector4<float>(x, y, p1[2], 1.0));
         }
@@ -154,7 +155,7 @@ class MyPlugin
         return points;
     }
 
-    private: int getPt(float n1, float n2, float perc)
+    private: float getPt(float n1, float n2, float perc)
     {
         float diff = n2 - n1;
 
