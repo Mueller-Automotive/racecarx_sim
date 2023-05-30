@@ -28,129 +28,78 @@ class MyPlugin
     {
         std::vector<Line*> lines;
 
-        /*
-        lines.push_back(new Line("line-1", 
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
-                gz::math::Vector4<float>(10.0, 10.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
-                90));
-
-        lines.push_back(new Line("line-2",
-                gz::math::Vector4<float>(3.0, 0.0, 0.0, 1.0),
-                gz::math::Vector4<float>(10.0, 7.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
-                90));
-
-        lines.push_back(new Line("line-3",
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
-                gz::math::Vector4<float>(-10.0, -10.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
-                90));
-        */
-
         // straight section
         lines.push_back(new Line(getId(), 
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
-                gz::math::Vector4<float>(10.0, 0.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector3<float>(0.0, 0.0, 0.01),
+                gz::math::Vector3<float>(10.0, 0.0, 0.01),
                 0));
 
         lines.push_back(new Line(getId(), 
-                gz::math::Vector4<float>(0.0, 4.0, 0.0, 1.0),
-                gz::math::Vector4<float>(10.0, 4.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector3<float>(0.0, 4.0, 0.01),
+                gz::math::Vector3<float>(10.0, 4.0, 0.01),
                 0));
 
         // intersection
         lines.push_back(new Line(getId(), 
-                gz::math::Vector4<float>(10.0, 0.0, 0.0, 1.0),
-                gz::math::Vector4<float>(15.0, -5.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector3<float>(10.0, 0.0, 0.01),
+                gz::math::Vector3<float>(15.0, -5.0, 0.01),
                 90));
 
         lines.push_back(new Line(getId(), 
-                gz::math::Vector4<float>(10.0, 4.0, 0.0, 1.0),
-                gz::math::Vector4<float>(15.0, 9.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector3<float>(10.0, 4.0, 0.01),
+                gz::math::Vector3<float>(15.0, 9.0, 0.01),
                 -90));
 
         lines.push_back(new DashedLine(getId(), 
-                gz::math::Vector4<float>(19.0, 9.0, 0.0, 1.0),
-                gz::math::Vector4<float>(24.0, 4.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector3<float>(19.0, 9.0, 0.01),
+                gz::math::Vector3<float>(24.0, 4.0, 0.01),
                 -90));
 
         lines.push_back(new Line(getId(), 
-                gz::math::Vector4<float>(19.0, -5.0, 0.0, 1.0),
-                gz::math::Vector4<float>(24.0, 0.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector3<float>(19.0, -5.0, 0.01),
+                gz::math::Vector3<float>(24.0, 0.0, 0.01),
                 90));
 
         // left turn sector
         lines.push_back(new DashedLine(getId(), 
-                gz::math::Vector4<float>(19.0, 9.0, 0.0, 1.0),
-                gz::math::Vector4<float>(19.0, 19.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector3<float>(19.0, 9.0, 0.01),
+                gz::math::Vector3<float>(19.0, 19.0, 0.01),
                 0));
 
         lines.push_back(new Line(getId(), 
-                gz::math::Vector4<float>(15.0, 9.0, 0.0, 1.0),
-                gz::math::Vector4<float>(15.0, 19.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector3<float>(15.0, 9.0, 0.01),
+                gz::math::Vector3<float>(15.0, 19.0, 0.01),
                 0));
 
         lines.push_back(new DashedLine(getId(), 
-                gz::math::Vector4<float>(19.0, 19.0, 0.0, 1.0),
-                gz::math::Vector4<float>(24.0, 24.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector3<float>(19.0, 19.0, 0.01),
+                gz::math::Vector3<float>(24.0, 24.0, 0.01),
                 90));
 
         // parking area
         lines.push_back(new Line(getId(), 
-                gz::math::Vector4<float>(1.0, 4.0, 0.0, 1.0),
-                gz::math::Vector4<float>(3.0, 6.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector3<float>(1.0, 4.0, 0.01),
+                gz::math::Vector3<float>(3.0, 6.0, 0.01),
                 0));
 
         lines.push_back(new Line(getId(), 
-                gz::math::Vector4<float>(3.0, 6.0, 0.0, 1.0),
-                gz::math::Vector4<float>(7.0, 6.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector3<float>(3.0, 6.0, 0.01),
+                gz::math::Vector3<float>(7.0, 6.0, 0.01),
                 0));
 
         lines.push_back(new Line(getId(), 
-                gz::math::Vector4<float>(7.0, 6.0, 0.0, 1.0),
-                gz::math::Vector4<float>(9.0, 4.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector3<float>(7.0, 6.0, 0.01),
+                gz::math::Vector3<float>(9.0, 4.0, 0.01),
                 0));
 
         lines.push_back(new Line(getId(), 
-                gz::math::Vector4<float>(3.0, 4.0, 0.0, 1.0),
-                gz::math::Vector4<float>(3.0, 6.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector3<float>(3.0, 4.0, 0.01),
+                gz::math::Vector3<float>(3.0, 6.0, 0.01),
                 0));
 
         lines.push_back(new Line(getId(), 
-                gz::math::Vector4<float>(7.0, 4.0, 0.0, 1.0),
-                gz::math::Vector4<float>(7.0, 6.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector3<float>(7.0, 4.0, 0.01),
+                gz::math::Vector3<float>(7.0, 6.0, 0.01),
                 0));
         
         
@@ -163,7 +112,11 @@ class MyPlugin
         
         for (int i = 0; i < lines.size(); i++)
         {
-            req.set_sdf(lines[i]->getSdf());
+            std::string document_start = "<?xml version='1.0'?><sdf version='1.7'>";
+            std::string document_end = "</sdf>";
+
+            req.set_sdf(document_start + lines[i]->getSdf() + document_end);
+
             bool executed = this->node.Request("/world/racecarx-depot/create", req, timeout, res, result);
             if (executed)
             {
@@ -171,12 +124,15 @@ class MyPlugin
                 std::cout << "Entity was created : [" << res.data() << "]" << std::endl;
                 else
                 {
-                std::cout << "Service call failed" << std::endl;
-                return;
+                    std::cout << "Service call failed" << std::endl;
+                    return;
                 }
             }
             else
+            {
                 std::cerr << "Service call timed out" << std::endl;
+            }
+            
         }
     }
 

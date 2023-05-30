@@ -13,31 +13,25 @@ class Line
 {
 public:
     std::string name;
-    gz::math::Vector4<float> point1;
-    gz::math::Vector4<float> point2;
-    gz::math::Vector4<float> pos;
-    gz::math::Vector4<float> rot;
+    gz::math::Vector3<float> point1;
+    gz::math::Vector3<float> point2;
     float angle;
 
     float line_width = 0.1;
 
-    Line(std::string _name, gz::math::Vector4<float> _point1, gz::math::Vector4<float> _point2, gz::math::Vector4<float> _pos, gz::math::Vector4<float> _rot, float _angle)
+    Line(std::string _name, gz::math::Vector3<float> _point1, gz::math::Vector3<float> _point2, float _angle)
     {
         name = _name;
         point1 = _point1;
         point2 = _point2;
-        pos = _pos;
-        rot = _rot;
         angle = _angle;
     }
 
-    Line(std::string _name, gz::math::Vector4<float> _point1, gz::math::Vector4<float> _point2, gz::math::Vector4<float> _pos, gz::math::Vector4<float> _rot)
+    Line(std::string _name, gz::math::Vector3<float> _point1, gz::math::Vector3<float> _point2)
     {
         name = _name;
         point1 = _point1;
         point2 = _point2;
-        pos = _pos;
-        rot = _rot;
         angle = 0;
     }
 
@@ -55,15 +49,15 @@ public:
 
     virtual std::string getSdfStraight()
     {
-        gz::math::Vector4<float> center = (point2 + point1) / 2;
+        gz::math::Vector3<float> center = (point2 + point1) / 2;
         float distance = point1.Distance(point2);
 
-        gz::math::Vector4<float> diff = point2 - point1;
+        gz::math::Vector3<float> diff = point2 - point1;
         float rot_z = std::atan(diff[1] / diff[0]);
 
-        std::string model_start = fmt::format("<?xml version='1.0'?><sdf version='1.7'><model name='{}'><static>true</static><self_collide>false</self_collide>", name);
-        std::string model_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", pos[0], pos[1], pos[2], rot[0], rot[1], rot[2]);
-        std::string model_end = "</model></sdf>";
+        std::string model_start = fmt::format("<model name='{}'><static>true</static><self_collide>false</self_collide>", name);
+        std::string model_pose = "<pose>0 0 0 0 0 0</pose>";
+        std::string model_end = "</model>";
 
         std::string link_start = fmt::format("<link name='link'> \
                                                 <visual name='visual'>\
@@ -85,26 +79,27 @@ public:
         std::string link_end = "</link>";
 
         std::string sdf = model_start + model_pose + link_start + link_pose + link_end + model_end;
+
         return sdf;
     }
 
     virtual std::string getSdfCurved()
     {
-        std::string model_start = fmt::format("<?xml version='1.0'?><sdf version='1.7'><model name='{}'><static>true</static><self_collide>false</self_collide>", name);
-        std::string model_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", pos[0], pos[1], pos[2], rot[0], rot[1], rot[2]);
-        std::string model_end = "</model></sdf>";
+        std::string model_start = fmt::format("<model name='{}'><static>true</static><self_collide>false</self_collide>", name);
+        std::string model_pose = "<pose>0 0 0 0 0 0</pose>";
+        std::string model_end = "</model>";
 
         int segments = 10;
 
-        std::vector<gz::math::Vector4<float>> points = getBezierPoints(point1, point2, angle, segments);
+        std::vector<gz::math::Vector3<float>> points = getBezierPoints(point1, point2, angle, segments);
         std::vector<std::string> links;
 
         // Iterate over points.size() - 1 because there's 1 more point than there are lines (a line consists of 2 points)
         for (int i = 0; i < points.size() - 1; i++)
         {
-            gz::math::Vector4<float> center = (points[i+1] + points[i]) / 2;
+            gz::math::Vector3<float> center = (points[i+1] + points[i]) / 2;
 
-            gz::math::Vector4<float> diff = points[i+1] - points[i];
+            gz::math::Vector3<float> diff = points[i+1] - points[i];
             float rot = std::atan(diff[1] / diff[0]);
 
             std::cout << "Center " << i << " :" << center << std::endl;
@@ -145,9 +140,9 @@ public:
 protected:
     // Create a discrete polyline between two points at a given angle
     // by creating a quadratic Bezier curve
-    std::vector<gz::math::Vector4<float>> getBezierPoints(gz::math::Vector4<float> p1, gz::math::Vector4<float> p2, float angle, int segments)
+    std::vector<gz::math::Vector3<float>> getBezierPoints(gz::math::Vector3<float> p1, gz::math::Vector3<float> p2, float angle, int segments)
     {
-        std::vector<gz::math::Vector4<float>> points;
+        std::vector<gz::math::Vector3<float>> points;
 
         // We need to create a third control point to "curve" our bezier curve
         // The third control point is the apex of an isosceles triangle, where p1
@@ -167,9 +162,9 @@ protected:
 
         std::cout << "h: " << h << std::endl;
 
-        gz::math::Vector4<float> midpoint = (p1 + p2) / 2;
-        gz::math::Vector4<float> u = (p2 - midpoint).Normalized();
-        gz::math::Vector4<float> controlPoint;
+        gz::math::Vector3<float> midpoint = (p1 + p2) / 2;
+        gz::math::Vector3<float> u = (p2 - midpoint).Normalized();
+        gz::math::Vector3<float> controlPoint;
         controlPoint[0] = -u[1];
         controlPoint[1] = u[0];
 
@@ -195,7 +190,7 @@ protected:
             std::cout << "Y" << i << " :" << x << std::endl;
             std::cout << "Perc: " << perc << std::endl;
 
-            points.push_back(gz::math::Vector4<float>(x, y, p1[2], 1.0));
+            points.push_back(gz::math::Vector3<float>(x, y, p1[2]));
         }
 
         return points;
