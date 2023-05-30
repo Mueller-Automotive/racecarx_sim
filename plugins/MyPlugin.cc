@@ -7,6 +7,7 @@
 #include <gz/transport/Node.hh>
 
 #include <plugins/road_gen/DashedLine.hpp>
+#include <plugins/road_gen/StraightSegment.hpp>
 
 using namespace gz;
 using namespace sim;
@@ -101,6 +102,8 @@ class MyPlugin
                 gz::math::Vector3<float>(7.0, 4.0, 0.01),
                 gz::math::Vector3<float>(7.0, 6.0, 0.01),
                 0));
+
+        StraightSegment straightSegment(gz::math::Vector3<float>(0.0, 0.0, 0.0));
         
         
         bool result;
@@ -109,13 +112,13 @@ class MyPlugin
         req.set_allow_renaming(true);
 
         unsigned int timeout = 5000;
-        
-        for (int i = 0; i < lines.size(); i++)
-        {
-            std::string document_start = "<?xml version='1.0'?><sdf version='1.7'>";
-            std::string document_end = "</sdf>";
 
-            req.set_sdf(document_start + lines[i]->getSdf() + document_end);
+        std::vector<std::string> models = straightSegment.getModelsSdf();
+
+        for (int i = 0; i < models.size(); i++)
+        {
+            //req.set_sdf(document_start + lines[i]->getSdf() + document_end);
+            req.set_sdf(models[i]);
 
             bool executed = this->node.Request("/world/racecarx-depot/create", req, timeout, res, result);
             if (executed)

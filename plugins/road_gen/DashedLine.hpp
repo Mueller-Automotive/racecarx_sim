@@ -19,12 +19,12 @@ public:
         gz::math::Vector3<float> diff = point2 - point1;
         float rot_z = std::atan(diff[1] / diff[0]);
 
-        std::string model_start = fmt::format("<model name='{}'><static>true</static><self_collide>false</self_collide>", name);
+        std::string model_start = fmt::format("<?xml version='1.0'?><sdf version='1.7'><model name='{}'><static>true</static><self_collide>false</self_collide>", name);
         std::string model_pose = "<pose>0 0 0 0 0 0</pose>";
-        std::string model_end = "</model>";
+        std::string model_end = "</model></sdf>";
 
         std::vector<std::string> links;
-        for (int i = 0; i < (int)(distance / (dash_solid + dash_gap)); i++)
+        for (int i = 0; i < (int)(distance / (float)(dash_solid + dash_gap)); i++)
         {
             std::string link_start = fmt::format("<link name='{}'> \
                                                     <visual name='visual'>\
@@ -41,7 +41,15 @@ public:
                                                         <emissive>0 0 0 1</emissive>\
                                                     </material>\
                                                     </visual>", "plane" + std::to_string(i), dash_solid, line_width);
-            gz::math::Vector3<float> new_pos = point1 + (direction * ((i * (dash_solid + dash_gap)) + dash_solid / 2));
+            
+            //float emptySpace = (distance / (float)(dash_solid + dash_gap)) - (int)(distance / (float)(dash_solid + dash_gap));
+            float emptySpace = dash_gap;
+            
+            std::cout << "a: " << (distance / (dash_solid + dash_gap)) << std::endl;
+            std::cout << "b: " << (int)(distance / (dash_solid + dash_gap)) << std::endl;
+            std::cout << "Empty space: " << emptySpace << std::endl;
+
+            gz::math::Vector3<float> new_pos = point1 + (direction * ((i * (dash_solid + dash_gap)) + dash_solid / 2 + emptySpace / 2));
             
             std::string link_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", new_pos[0], new_pos[1], new_pos[2], 0, 0, rot_z);
             std::string link_end = "</link>";
@@ -63,9 +71,9 @@ public:
 
     std::string getSdfCurved()
     {
-        std::string model_start = fmt::format("<model name='{}'><static>true</static><self_collide>false</self_collide>", name);
+        std::string model_start = fmt::format("<?xml version='1.0'?><sdf version='1.7'><model name='{}'><static>true</static><self_collide>false</self_collide>", name);
         std::string model_pose = "<pose>0 0 0 0 0 0</pose>";
-        std::string model_end = "</model>";
+        std::string model_end = "</model></sdf>";
 
         int segments = 10;
 

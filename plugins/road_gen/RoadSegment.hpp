@@ -8,15 +8,23 @@
 class RoadSegment
 {
 public:
-    virtual RoadSegment(gz::math::Vector4<float> _position)
+    RoadSegment(gz::math::Vector3<float> _position)
     {
         position = _position;
     }
-    virtual std::string getSdf() = 0;
+    virtual std::vector<std::string> getModelsSdf() = 0;
+
 protected:
-    gz::math::Vector4<float> position;
-    std::vector<Line> lines;
+    gz::math::Vector3<float> position;
+    std::vector<Line*> lines;
 
     std::string document_start = "<?xml version='1.0'?><sdf version='1.7'>";
     std::string document_end = "</sdf>";
+    unsigned int id = 0;
+
+    std::string getId()
+    {
+        id++;
+        return "road-element-" + std::to_string(id);
+    }
 };

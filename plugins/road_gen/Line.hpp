@@ -55,9 +55,9 @@ public:
         gz::math::Vector3<float> diff = point2 - point1;
         float rot_z = std::atan(diff[1] / diff[0]);
 
-        std::string model_start = fmt::format("<model name='{}'><static>true</static><self_collide>false</self_collide>", name);
+        std::string model_start = fmt::format("<?xml version='1.0'?><sdf version='1.7'><model name='{}'><static>true</static><self_collide>false</self_collide>", name);
         std::string model_pose = "<pose>0 0 0 0 0 0</pose>";
-        std::string model_end = "</model>";
+        std::string model_end = "</model></sdf>";
 
         std::string link_start = fmt::format("<link name='link'> \
                                                 <visual name='visual'>\
@@ -85,9 +85,9 @@ public:
 
     virtual std::string getSdfCurved()
     {
-        std::string model_start = fmt::format("<model name='{}'><static>true</static><self_collide>false</self_collide>", name);
+        std::string model_start = fmt::format("<?xml version='1.0'?><sdf version='1.7'><model name='{}'><static>true</static><self_collide>false</self_collide>", name);
         std::string model_pose = "<pose>0 0 0 0 0 0</pose>";
-        std::string model_end = "</model>";
+        std::string model_end = "</model></sdf>";
 
         int segments = 10;
 
