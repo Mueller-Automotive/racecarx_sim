@@ -117,6 +117,41 @@ class MyPlugin
                 gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
                 90));
 
+        // parking area
+        lines.push_back(new Line(getId(), 
+                gz::math::Vector4<float>(1.0, 4.0, 0.0, 1.0),
+                gz::math::Vector4<float>(3.0, 6.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                0));
+
+        lines.push_back(new Line(getId(), 
+                gz::math::Vector4<float>(3.0, 6.0, 0.0, 1.0),
+                gz::math::Vector4<float>(7.0, 6.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                0));
+
+        lines.push_back(new Line(getId(), 
+                gz::math::Vector4<float>(7.0, 6.0, 0.0, 1.0),
+                gz::math::Vector4<float>(9.0, 4.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                0));
+
+        lines.push_back(new Line(getId(), 
+                gz::math::Vector4<float>(3.0, 4.0, 0.0, 1.0),
+                gz::math::Vector4<float>(3.0, 6.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                0));
+
+        lines.push_back(new Line(getId(), 
+                gz::math::Vector4<float>(7.0, 4.0, 0.0, 1.0),
+                gz::math::Vector4<float>(7.0, 6.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                0));
         
         
         bool result;
