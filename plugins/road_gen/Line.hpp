@@ -55,9 +55,11 @@ public:
 
     virtual std::string getSdfStraight()
     {
-        gz::math::Vector4<float> center = (point2 - point1) / 2;
+        gz::math::Vector4<float> center = (point2 + point1) / 2;
         float distance = point1.Distance(point2);
-        std::cout << "Distance: " << distance << std::endl;
+
+        gz::math::Vector4<float> diff = point2 - point1;
+        float rot_z = std::atan(diff[1] / diff[0]);
 
         std::string model_start = fmt::format("<?xml version='1.0'?><sdf version='1.7'><model name='{}'><static>true</static><self_collide>false</self_collide>", name);
         std::string model_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", pos[0], pos[1], pos[2], rot[0], rot[1], rot[2]);
@@ -79,14 +81,7 @@ public:
                                                 </material>\
                                                 </visual>", distance, line_width);
         
-        float x = 0;
-        float y = 0;
-        float z = 0;
-        float r_x = 0;
-        float r_y = 0;
-        float r_z = 0;
-        
-        std::string link_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", center[0], center[1], center[2], r_x, r_y, r_z);
+        std::string link_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", center[0], center[1], center[2], 0, 0, rot_z);
         std::string link_end = "</link>";
 
         std::string sdf = model_start + model_pose + link_start + link_pose + link_end + model_end;

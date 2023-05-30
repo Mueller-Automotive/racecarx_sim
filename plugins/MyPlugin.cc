@@ -26,44 +26,99 @@ class MyPlugin
                             EntityComponentManager &_ecm,
                             EventManager &/*_eventMgr*/) override
     {
-        // Read property from SDF
-        auto linkName = _sdf->Get<std::string>("plane2");
+        std::vector<Line*> lines;
 
-        // Create model object to access convenient functions
-        auto model = Model(_entity);
-
-        // Get link entity
-        this->linkEntity = _entity;
-
-        std::vector<gz::math::Vector4<float>> points = getBezierPoints(
-            gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0), 
-            gz::math::Vector4<float>(13.0, 13.0, 0.0, 1.0), 
-            90,
-            5);
-
-        for (int i = 0; i < points.size(); i++)
-        {
-            std::cout << points[i] << std::endl;
-        }
-
-        DashedLine dashed_line("dashed-line-1", 
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0), 
-                gz::math::Vector4<float>(-10.0, -10.0, 0.0, 1.0), 
-                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
-                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
-                90);
-        
-        Line curved_line("curved-line-1", 
+        /*
+        lines.push_back(new Line("line-1", 
                 gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
                 gz::math::Vector4<float>(10.0, 10.0, 0.0, 1.0),
-                gz::math::Vector4<float>(0.0, 3.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
                 gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
-                90);
+                90));
 
-        std::vector<Line*> lines;
-        lines.push_back(&dashed_line);
-        lines.push_back(&curved_line);
+        lines.push_back(new Line("line-2",
+                gz::math::Vector4<float>(3.0, 0.0, 0.0, 1.0),
+                gz::math::Vector4<float>(10.0, 7.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                90));
 
+        lines.push_back(new Line("line-3",
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector4<float>(-10.0, -10.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                90));
+        */
+
+        // straight section
+        lines.push_back(new Line(getId(), 
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                gz::math::Vector4<float>(10.0, 0.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                0));
+
+        lines.push_back(new Line(getId(), 
+                gz::math::Vector4<float>(0.0, 4.0, 0.0, 1.0),
+                gz::math::Vector4<float>(10.0, 4.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                0));
+
+        // intersection
+        lines.push_back(new Line(getId(), 
+                gz::math::Vector4<float>(10.0, 0.0, 0.0, 1.0),
+                gz::math::Vector4<float>(15.0, -5.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                90));
+
+        lines.push_back(new Line(getId(), 
+                gz::math::Vector4<float>(10.0, 4.0, 0.0, 1.0),
+                gz::math::Vector4<float>(15.0, 9.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                -90));
+
+        lines.push_back(new DashedLine(getId(), 
+                gz::math::Vector4<float>(19.0, 9.0, 0.0, 1.0),
+                gz::math::Vector4<float>(24.0, 4.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                -90));
+
+        lines.push_back(new Line(getId(), 
+                gz::math::Vector4<float>(19.0, -5.0, 0.0, 1.0),
+                gz::math::Vector4<float>(24.0, 0.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                90));
+
+        // left turn sector
+        lines.push_back(new DashedLine(getId(), 
+                gz::math::Vector4<float>(19.0, 9.0, 0.0, 1.0),
+                gz::math::Vector4<float>(19.0, 19.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                0));
+
+        lines.push_back(new Line(getId(), 
+                gz::math::Vector4<float>(15.0, 9.0, 0.0, 1.0),
+                gz::math::Vector4<float>(15.0, 19.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                0));
+
+        lines.push_back(new DashedLine(getId(), 
+                gz::math::Vector4<float>(19.0, 19.0, 0.0, 1.0),
+                gz::math::Vector4<float>(24.0, 24.0, 0.0, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.01, 1.0),
+                gz::math::Vector4<float>(0.0, 0.0, 0.0, 1.0),
+                90));
+
+        
+        
         bool result;
         gz::msgs::EntityFactory req;
         gz::msgs::Boolean res;
@@ -168,10 +223,14 @@ class MyPlugin
         return degrees * M_PI / 180.0;
     }
 
+    private: std::string getId()
+    {
+        id++;
+        return "road-element-" + std::to_string(id);
+    }
 
-    // ID of link entity
-    private: Entity linkEntity;
     private: transport::Node node;
+    private: unsigned int id = 0;
 };
 
 // Register plugin

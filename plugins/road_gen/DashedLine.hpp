@@ -44,7 +44,7 @@ public:
             float r_y = 0;
             float r_z = 0;
             
-            std::string link_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", x, y, z, r_x, r_y, r_z);
+            std::string link_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", x + point1[0], y + point1[1], z + point2[2], r_x, r_y, r_z);
             std::string link_end = "</link>";
 
             links.push_back(link_start + link_pose + link_end);
@@ -79,7 +79,7 @@ public:
             gz::math::Vector4<float> center = (points[i+1] + points[i]) / 2;
 
             gz::math::Vector4<float> diff = points[i+1] - points[i];
-            float rot = std::atan(diff[1] / diff[0]);
+            float rot_z = std::atan(diff[1] / diff[0]);
 
             std::cout << "Center " << i << " :" << center << std::endl;
 
@@ -99,7 +99,7 @@ public:
                                                 </material>\
                                                 </visual>", "link"+std::to_string(i), points[i].Distance(points[i+1]) / 2, line_width);
 
-            std::string link_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", center[0], center[1], center[2], 0, 0, rot);
+            std::string link_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", center[0], center[1], center[2], 0, 0, rot_z);
             std::string link_end = "</link>";
 
             links.push_back(link_start + link_pose + link_end);
