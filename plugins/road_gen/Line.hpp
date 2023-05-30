@@ -15,23 +15,29 @@ public:
     std::string name;
     gz::math::Vector3<float> point1;
     gz::math::Vector3<float> point2;
+    gz::math::Vector3<float> pos;
+    gz::math::Vector3<float> rot;
     float angle;
 
     float line_width = 0.1;
 
-    Line(std::string _name, gz::math::Vector3<float> _point1, gz::math::Vector3<float> _point2, float _angle)
+    Line(std::string _name, gz::math::Vector3<float> _point1, gz::math::Vector3<float> _point2, gz::math::Vector3<float> _pos, gz::math::Vector3<float> _rot, float _angle)
     {
         name = _name;
         point1 = _point1;
         point2 = _point2;
+        pos = _pos;
+        rot = _rot;
         angle = _angle;
     }
 
-    Line(std::string _name, gz::math::Vector3<float> _point1, gz::math::Vector3<float> _point2)
+    Line(std::string _name, gz::math::Vector3<float> _point1, gz::math::Vector3<float> _point2, gz::math::Vector3<float> _pos, gz::math::Vector3<float> _rot)
     {
         name = _name;
         point1 = _point1;
         point2 = _point2;
+        pos = _pos;
+        rot = _rot;
         angle = 0;
     }
 
@@ -56,7 +62,9 @@ public:
         float rot_z = std::atan(diff[1] / diff[0]);
 
         std::string model_start = fmt::format("<?xml version='1.0'?><sdf version='1.7'><model name='{}'><static>true</static><self_collide>false</self_collide>", name);
-        std::string model_pose = "<pose>0 0 0 0 0 0</pose>";
+        std::string model_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", 
+                                            pos[0], pos[1], pos[2], 
+                                            degreesToRadians(rot[0]), degreesToRadians(rot[1]), degreesToRadians(rot[2]));
         std::string model_end = "</model></sdf>";
 
         std::string link_start = fmt::format("<link name='link'> \
@@ -86,7 +94,9 @@ public:
     virtual std::string getSdfCurved()
     {
         std::string model_start = fmt::format("<?xml version='1.0'?><sdf version='1.7'><model name='{}'><static>true</static><self_collide>false</self_collide>", name);
-        std::string model_pose = "<pose>0 0 0 0 0 0</pose>";
+        std::string model_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", 
+                                    pos[0], pos[1], pos[2], 
+                                    degreesToRadians(rot[0]), degreesToRadians(rot[1]), degreesToRadians(rot[2]));
         std::string model_end = "</model></sdf>";
 
         int segments = 10;

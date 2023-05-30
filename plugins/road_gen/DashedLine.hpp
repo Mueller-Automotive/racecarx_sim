@@ -5,11 +5,11 @@
 class DashedLine : public Line
 {
 public:
-    DashedLine(std::string _name, gz::math::Vector3<float> _point1, gz::math::Vector3<float> _point2)
-    : Line(_name, _point1, _point2) {}
+    DashedLine(std::string _name, gz::math::Vector3<float> _point1, gz::math::Vector3<float> _point2,gz::math::Vector3<float> _pos, gz::math::Vector3<float> _rot)
+    : Line(_name, _point1, _point2, _pos, _rot) {}
 
-    DashedLine(std::string _name, gz::math::Vector3<float> _point1, gz::math::Vector3<float> _point2, float _angle)
-    : Line(_name, _point1, _point2, _angle) {}
+    DashedLine(std::string _name, gz::math::Vector3<float> _point1, gz::math::Vector3<float> _point2, gz::math::Vector3<float> _pos, gz::math::Vector3<float> _rot, float _angle)
+    : Line(_name, _point1, _point2, _pos, _rot, _angle) {}
 
     virtual std::string getSdfStraight()
     {
@@ -20,7 +20,9 @@ public:
         float rot_z = std::atan(diff[1] / diff[0]);
 
         std::string model_start = fmt::format("<?xml version='1.0'?><sdf version='1.7'><model name='{}'><static>true</static><self_collide>false</self_collide>", name);
-        std::string model_pose = "<pose>0 0 0 0 0 0</pose>";
+        std::string model_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", 
+                                    pos[0], pos[1], pos[2], 
+                                    degreesToRadians(rot[0]), degreesToRadians(rot[1]), degreesToRadians(rot[2]));
         std::string model_end = "</model></sdf>";
 
         std::vector<std::string> links;
@@ -72,7 +74,9 @@ public:
     std::string getSdfCurved()
     {
         std::string model_start = fmt::format("<?xml version='1.0'?><sdf version='1.7'><model name='{}'><static>true</static><self_collide>false</self_collide>", name);
-        std::string model_pose = "<pose>0 0 0 0 0 0</pose>";
+        std::string model_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", 
+                                    pos[0], pos[1], pos[2], 
+                                    degreesToRadians(rot[0]), degreesToRadians(rot[1]), degreesToRadians(rot[2]));
         std::string model_end = "</model></sdf>";
 
         int segments = 10;
