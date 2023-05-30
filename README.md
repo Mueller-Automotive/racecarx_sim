@@ -1,4 +1,5 @@
 # ROS2 and Gazebo simulation
+![Screenshot](https://cdn.discordapp.com/attachments/663174968791662594/1112913030582390876/image.png)
 
 ## ROS2 installation
 Ensure you are running an Ubuntu 22 (jammy) based distro (e.g. Mint 21)
