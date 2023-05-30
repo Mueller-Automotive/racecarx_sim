@@ -11,6 +11,7 @@
 #include <plugins/road_gen/LeftTurnSegment.hpp>
 #include <plugins/road_gen/RightTurnSegment.hpp>
 #include <plugins/road_gen/IntersectionSegment.hpp>
+#include <plugins/road_gen/ParkingSegment.hpp>
 #include <plugins/road_gen/Utils.hpp>
 
 using namespace gz;
@@ -34,40 +35,35 @@ class MyPlugin
 
         std::vector<RoadSegment*> segments;
         segments.push_back(new StraightSegment(gz::math::Vector3<float>(0.0, 0.0, 0.0),
-                                        gz::math::Vector3<float>(0.0, 0.0, 0.0))
-                                        );
+                                        gz::math::Vector3<float>(0.0, 0.0, 0.0)));
 
         segments.push_back(new IntersectionSegment(gz::math::Vector3<float>(10.0, 0.0, 0.0),
-                                        gz::math::Vector3<float>(0.0, 0.0, 0.0))
-                                        );
+                                        gz::math::Vector3<float>(0.0, 0.0, 0.0)));
 
         segments.push_back(new StraightSegment(gz::math::Vector3<float>(19.0, 9.0, 0.0),
-                                        gz::math::Vector3<float>(0.0, 0.0, 90.0))
-                                        );
+                                        gz::math::Vector3<float>(0.0, 0.0, 90.0)));
 
         segments.push_back(new StraightSegment(gz::math::Vector3<float>(15.0, -5.0, 0.0),
-                                        gz::math::Vector3<float>(0.0, 0.0, 270.0))
-                                        );
+                                        gz::math::Vector3<float>(0.0, 0.0, 270.0)));
 
         segments.push_back(new LeftTurnSegment(gz::math::Vector3<float>(19.0, 19.0, 0.0),
-                                        gz::math::Vector3<float>(0.0, 0.0, 90.0))
-                                        );
+                                        gz::math::Vector3<float>(0.0, 0.0, 90.0)));
 
         segments.push_back(new StraightSegment(gz::math::Vector3<float>(0.0, 24.0, 0.0),
-                                        gz::math::Vector3<float>(0.0, 0.0, 0.0))
-                                        );
+                                        gz::math::Vector3<float>(0.0, 0.0, 0.0)));
 
         segments.push_back(new LeftTurnSegment(gz::math::Vector3<float>(0.0, 28.0, 0.0),
-                                        gz::math::Vector3<float>(0.0, 0.0, 180.0))
-                                        );
+                                        gz::math::Vector3<float>(0.0, 0.0, 180.0)));
 
         segments.push_back(new StraightSegment(gz::math::Vector3<float>(-5.0, 9.0, 0.0),
-                                        gz::math::Vector3<float>(0.0, 0.0, 90.0))
-                                        );
+                                        gz::math::Vector3<float>(0.0, 0.0, 90.0)));
 
         segments.push_back(new LeftTurnSegment(gz::math::Vector3<float>(-9.0, 9.0, 0.0),
-                                        gz::math::Vector3<float>(0.0, 0.0, -90.0))
-                                        );
+                                        gz::math::Vector3<float>(0.0, 0.0, -90.0)));
+
+
+        segments.push_back(new ParkingSegment(gz::math::Vector3<float>(0.0, 0.0, 0.0),
+                                        gz::math::Vector3<float>(0.0, 0.0, 0.0)));
         
         bool result;
         gz::msgs::EntityFactory req;
