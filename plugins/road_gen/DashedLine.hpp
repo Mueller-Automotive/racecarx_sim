@@ -14,6 +14,10 @@ public:
     virtual std::string getSdfStraight()
     {
         float distance = point1.Distance(point2);
+        gz::math::Vector4<float> direction = (point2 - point1).Normalized();
+
+        gz::math::Vector4<float> diff = point2 - point1;
+        float rot_z = std::atan(diff[1] / diff[0]);
 
         std::string model_start = fmt::format("<?xml version='1.0'?><sdf version='1.7'><model name='{}'><static>true</static><self_collide>false</self_collide>", name);
         std::string model_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", pos[0], pos[1], pos[2], rot[0], rot[1], rot[2]);
@@ -37,14 +41,9 @@ public:
                                                         <emissive>0 0 0 1</emissive>\
                                                     </material>\
                                                     </visual>", "plane" + std::to_string(i), dash_solid, line_width);
-            float x = (i * (dash_solid + dash_gap)) - dash_solid / 2;
-            float y = 0;
-            float z = 0;
-            float r_x = 0;
-            float r_y = 0;
-            float r_z = 0;
+            gz::math::Vector4<float> new_pos = point1 + (direction * ((i * (dash_solid + dash_gap)) + dash_solid / 2));
             
-            std::string link_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", x + point1[0], y + point1[1], z + point2[2], r_x, r_y, r_z);
+            std::string link_pose = fmt::format("<pose>{} {} {} {} {} {}</pose>", new_pos[0], new_pos[1], new_pos[2], 0, 0, rot_z);
             std::string link_end = "</link>";
 
             links.push_back(link_start + link_pose + link_end);
@@ -116,8 +115,8 @@ public:
         return sdf;
     }
 
-    float dash_solid = 1.0;
-    float dash_gap = 1.0;
+    float dash_solid = 0.5;
+    float dash_gap = 0.5;
 private:
 
 };
