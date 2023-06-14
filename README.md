@@ -41,15 +41,15 @@ source /opt/ros/humble/setup.bash
 ## Clone, build and launch
 For the time being, actuator message bridging in the `ros-humble-ros-gz` package appears to be broken, so we clone locally and build from source.
 ```
-mkdir mueller-auto-sim
-cd mueller-auto-sim
-git clone git@github.com:Mueller-Automotive/mueller_auto.git
+mkdir racecarx-sim-workspace
+cd racecarx-sim-workspace
+git clone git@github.com:Mueller-Automotive/racecarx-sim.git
 git clone git@github.com:gazebosim/ros_gz.git
 
 colcon build --symlink-install --parallel-workers 8
 
 source install/setup.bash
-ros2 launch mueller_auto launch_sim.launch.py
+ros2 launch racecarx-sim launch_sim.launch.py
 ```
 
 ## Control
