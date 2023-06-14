@@ -256,12 +256,14 @@
 				<ignition-gui>
 				<property key="state" type="string">docked</property>
 				</ignition-gui>
+				<topic>/camera</topic>
 			</plugin>
 
 			<plugin filename="VisualizeLidar" name="Visualize Lidar">
 				<ignition-gui>
 				<property key="state" type="string">docked</property>
 				</ignition-gui>
+				<topic>/lidar</topic>
       		</plugin>
 
 			<!-- Inspector -->
