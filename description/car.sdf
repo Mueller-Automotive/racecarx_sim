@@ -4,7 +4,7 @@
 		<pose>0 2 0.33 0 0 0</pose>
 		<static>false</static>
 		<self_collide>false</self_collide>
-		<plugin filename="libMyPlugin.so" name="MyPlugin"></plugin>
+		<plugin filename="libRoadGen.so" name="RoadGen"></plugin>
 		<link name='chassis'>
 			<pose>-0.15142700000000001 0 0.17499999999999999 0 0 0</pose>
 			<inertial>

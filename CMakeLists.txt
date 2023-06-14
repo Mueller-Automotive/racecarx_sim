@@ -30,9 +30,9 @@ set(GZ_PLUGIN_VER ${gz-plugin2_VERSION_MAJOR})
 set(GZ_COMMON_VER ${gz-common5_VERSION_MAJOR})
 
 # Add sources for each plugin to be registered.
-add_library(MyPlugin SHARED plugins/MyPlugin.cc)
-set_property(TARGET MyPlugin PROPERTY CXX_STANDARD 17)
-target_link_libraries(MyPlugin
+add_library(RoadGen SHARED plugins/road_gen/RoadGen.cc)
+set_property(TARGET RoadGen PROPERTY CXX_STANDARD 17)
+target_link_libraries(RoadGen
   gz-common${GZ_COMMON_VER}::gz-common${GZ_COMMON_VER}
   gz-plugin${GZ_PLUGIN_VER}::gz-plugin${GZ_PLUGIN_VER}
   gz-sim${GZ_SIM_VER}::gz-sim${GZ_SIM_VER}
@@ -50,13 +50,10 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
-install(TARGETS MyPlugin EXPORT MyPlugin
+install(TARGETS RoadGen EXPORT RoadGen
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
 )
-
-#ament_export_targets(MyPlugin)
-#ament_export_dependencies(MyPlugin)
 
 ament_package()
