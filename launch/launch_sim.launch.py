@@ -28,6 +28,17 @@ def generate_launch_description():
         ]
     )
 
+    # Bridge Twist messages between ROS and Gazebo
+    twist_bridge = Node(package='ros_gz_bridge', executable='parameter_bridge',
+                            name='twist_bridge',
+                            output='screen',
+                            parameters=[{
+                                'use_sim_time': True
+                            }],
+                            arguments=[
+                                '/cmd_vel' + '@geometry_msgs/msg/Twist' + ']gz.msgs.Twist',
+                            ])
+
     # Bridge Actuators messages between ROS and Gazebo
     actuators_bridge = Node(package='ros_gz_bridge', executable='parameter_bridge',
                             name='actuators_bridge',
@@ -59,6 +70,7 @@ def generate_launch_description():
 
     # Launch them all!
     return LaunchDescription([
+        twist_bridge,
         actuators_bridge,
         gz_sim,
         spawn_robot,

@@ -29,6 +29,7 @@ sudo apt-get install --no-install-recommends -y \
     ros-humble-gazebo-ros \
     ros-humble-gazebo-ros-pkgs \
     gz-garden \
+    ros-humble-ros-gz \
     ros-humble-actuator-msgs \
     ros-humble-ros-gzgarden-bridge \
     ros-humble-ros-gzgarden-image \
@@ -39,12 +40,10 @@ source /opt/ros/humble/setup.bash
 ```
 
 ## Clone, build and launch
-For the time being, actuator message bridging in the `ros-humble-ros-gz` package appears to be broken, so we clone locally and build from source.
 ```
 mkdir racecarx-sim-workspace
 cd racecarx-sim-workspace
 git clone git@github.com:Mueller-Automotive/racecarx-sim.git
-git clone git@github.com:gazebosim/ros_gz.git
 
 colcon build --symlink-install --parallel-workers 8
 
@@ -53,10 +52,24 @@ ros2 launch racecarx-sim launch_sim.launch.py
 ```
 
 ## Control
+If `twist` steering is enabled:
 ```
-gz topic --topic /actuators --msgtype gz.msgs.Actuators -p"
-position: [-0.3]
-velocity: [5]
+ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "linear:
+  x: 1.0
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.3"
+```
+Where `linear.x` is the revolution speed of the wheels in radians per second and `angular.x` is the steering angle in radians
+
+If `actuator` steering is enabled:
+```
+ros2 topic pub /actuators actuator_msgs/msg/Actuators "
+position: [0.3]
+velocity: [1]
 "
 ```
 Where `position` is the steering angle in radians and `velocity` is the revolution speed of the wheels in radians per second
