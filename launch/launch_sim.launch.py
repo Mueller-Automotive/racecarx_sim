@@ -91,15 +91,24 @@ def generate_launch_description():
         output='screen'
     )
 
-    test_node = Node(
+    # Spawn a sample camera listener node that does whatever with the image using OpenCV
+    camera_listener = Node(
         package='racecarx_control',
-        executable='publisher',
+        executable='camera_listener',
+        output='screen'
+    )
+
+    # Spawn a sample twist publishing node that sends a command to turn right, then stop
+    twist_publisher = Node(
+        package='racecarx_control',
+        executable='twist_publisher',
         output='screen'
     )
 
     # Launch them all!
     return LaunchDescription([
-        test_node,
+        camera_listener,
+        twist_publisher,
         twist_bridge,
         actuators_bridge,
         camera_bridge,

@@ -266,6 +266,12 @@
 				<topic>/lidar</topic>
       		</plugin>
 
+			<plugin filename="Teleop" name="Teleop">
+				<ignition-gui>
+				<property type="string" key="state">docked</property>
+				</ignition-gui>
+			</plugin>
+
 			<!-- Inspector -->
 			<plugin filename="ComponentInspector" name="Component inspector">
 				<ignition-gui>
