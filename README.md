@@ -34,6 +34,7 @@ sudo apt-get install --no-install-recommends -y \
     ros-humble-ros-gzgarden-bridge \
     ros-humble-ros-gzgarden-image \
     ros-humble-ros-gzgarden-sim \
+    ros-humble-cv-bridge \
 
 echo -e "source /opt/ros/humble/setup.bash" >> ~/.bashrc
 source /opt/ros/humble/setup.bash
@@ -41,9 +42,11 @@ source /opt/ros/humble/setup.bash
 
 ## Clone, build and launch
 ```
-mkdir racecarx_sim_ws
-cd racecarx_sim_ws
+mkdir racecarx_workspace
+cd racecarx_workspace
 git clone git@github.com:Mueller-Automotive/racecarx_sim.git
+git clone git@github.com:Mueller-Automotive/racecarx_control.git
+git clone git@github.com:Mueller-Automotive/racecarx_bringup.git
 
 colcon build --symlink-install --parallel-workers 8
 
@@ -52,7 +55,7 @@ ros2 launch racecarx_sim launch_sim.launch.py
 ```
 
 ## Control
-If `twist` steering is enabled:
+If `twist` steering is enabled (which is the default), you can either use the Teleop widget or this command:
 ```
 ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "linear:
   x: 1.0

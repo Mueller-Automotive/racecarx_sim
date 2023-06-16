@@ -111,6 +111,7 @@ class RoadGen
                             const EntityComponentManager &_ecm) override
     {
         // Do something!
+        // Probably calculate ground truth data here
     }
 
     private: transport::Node node;
