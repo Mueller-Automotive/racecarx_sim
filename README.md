@@ -41,14 +41,14 @@ source /opt/ros/humble/setup.bash
 
 ## Clone, build and launch
 ```
-mkdir racecarx-sim-workspace
-cd racecarx-sim-workspace
-git clone git@github.com:Mueller-Automotive/racecarx-sim.git
+mkdir racecarx_sim_ws
+cd racecarx_sim_ws
+git clone git@github.com:Mueller-Automotive/racecarx_sim.git
 
 colcon build --symlink-install --parallel-workers 8
 
 source install/setup.bash
-ros2 launch racecarx-sim launch_sim.launch.py
+ros2 launch racecarx_sim launch_sim.launch.py
 ```
 
 ## Control

@@ -13,7 +13,7 @@ def generate_launch_description():
     # Include the robot_state_publisher launch file, provided by our own package. Force sim time to be enabled
     
     # Make sure package name is correct
-    package_name='racecarx-sim' # <--- CHANGE ME
+    package_name='racecarx_sim' # <--- CHANGE ME
 
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
     gz_sim_launch = PathJoinSubstitution([pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py'])
@@ -91,8 +91,15 @@ def generate_launch_description():
         output='screen'
     )
 
+    test_node = Node(
+        package='racecarx_control',
+        executable='publisher',
+        output='screen'
+    )
+
     # Launch them all!
     return LaunchDescription([
+        test_node,
         twist_bridge,
         actuators_bridge,
         camera_bridge,
